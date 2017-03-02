@@ -1,7 +1,7 @@
-import syncAdapter from './sync'
-import asyncAdapter from './async'
+import syncParser from './sync'
+import asyncParser from './async'
 
-export { syncAdapter as syncAdapter }
-export { asyncAdapter as asyncAdapter }
+export { syncParser as syncParser }
+export { asyncParser as asyncParser }
 
-export default syncAdapter
+export default syncParser

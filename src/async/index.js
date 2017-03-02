@@ -11,7 +11,7 @@
 
 let parse
 
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && typeof process !== 'object') {
   
   parse = function () {
     throw new Error(
@@ -26,4 +26,4 @@ if (typeof window !== 'undefined') {
   parse = require('./parser').default
 }
 
-export default { parse }
+export default parse
