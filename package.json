@@ -4,11 +4,11 @@
   "description": "PreJSS Parser based on PostCSS and plugins",
   "main": "lib/index.js",
   "scripts": {
-    "clean": "rimraf lib dist",
+    "clean": "rimraf lib lib",
     "build:lib": "babel src --out-dir lib",
     "build": "npm run clean && npm run build:lib",
-    "lint": "./node_modules/.bin/eslint src/",
-    "flow": "flow check src/",
+    "lint": "eslint src",
+    "flow": "flow check src",
     "test": "jest",
     "prepublish": "npm run build"
   },
