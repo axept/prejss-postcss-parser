@@ -1,0 +1,38 @@
+{
+  "name": "prejss-postcss-parser",
+  "version": "0.1.0",
+  "description": "PreJSS Parser based on PostCSS and plugins",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axept/prejss-postcss-parser.git"
+  },
+  "keywords": [
+    "css",
+    "css-in-js",
+    "prejss",
+    "postcss",
+    "postjss",
+    "rework",
+    "jss",
+    "styled-components",
+    "stylesheets",
+    "jss-from-css",
+    "jss-from-postcss",
+    "scss",
+    "sass",
+    "less",
+    "stylus",
+    "sugarss",
+    "parser"
+  ],
+  "author": "Axept <office@axept.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axept/prejss/issues"
+  },
+  "homepage": "https://github.com/axept/prejss"
+}
