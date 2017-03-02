@@ -6,6 +6,6 @@ prejss-postcss-parser
 [![npm downloads](https://img.shields.io/npm/dt/prejss-postcss-parser.svg?style=flat-square)](https://www.npmjs.com/package/prejss-postcss-parser)
 [![npm license](https://img.shields.io/npm/l/prejss-postcss-parser.svg?style=flat-square)](https://www.npmjs.com/package/prejss-postcss-parser)
 
-PostCSS Parser for PreJSS.
+[PostCSS](https://github.com/postcss/postcss) Parser for PreJSS.
 
 See details here: https://github.com/axept/prejss
