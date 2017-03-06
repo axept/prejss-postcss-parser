@@ -1,5 +1,5 @@
 /**
- * PostCSS Sync Adapter for PreJSS
+ * Full-featured PostCSS Sync Parser for PreJSS
  *
  * Until we did not solved how we can get all PostCSS plugins in browser
  * in high performant way, we have to throw error and require
@@ -11,11 +11,13 @@
 
 let parse
 
-if (typeof window !== 'undefined' && typeof process !== 'object') {
+const isBrowser = (typeof window !== 'undefined' && typeof process !== 'object')
+
+if (isBrowser) {
   
   parse = function () {
     throw new Error(
-      'PreJSS fatal: Sorry, at the moment Web Browser is not supporting' +
+      'PostCSS Parser for PreJSS fatal: Sorry, at the moment Web Browser is not supporting' +
       ' out of the box. Please use babel-plugin-transform-prejss instead.'
     )
   }
