@@ -1,6 +1,6 @@
 {
   "name": "prejss-postcss-parser",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "PreJSS Parser based on PostCSS and plugins",
   "main": "lib/index.js",
   "scripts": {
