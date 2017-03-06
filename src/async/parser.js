@@ -7,7 +7,6 @@ import postcssJs from 'postcss-js'
 import postcssrc from 'postcss-load-config'
 
 let config
-let options
 let processor
 
 /**
@@ -17,31 +16,36 @@ let processor
  * 2. Process parsing with initiated options
  * 
  * @param {String} rawStyles
+ * @param {Object} processOptions
  * @returns {Object} JSS Object
  */
-const processParsing = async (rawStyles) => {
-  if (!config) {
+const processParsing = async (rawStyles, processOptions = {}) => {
+  const { config: customConfig } = processOptions
+  if (!config && customConfig) {
+    config = customConfig
+  } else if (!config) {
     config = await postcssrc()
-
-    const loadedConfig = config.options || {}
-    options = { parser: safeParse, ...loadedConfig }
   }
-  
+
+  const { plugins = [], options = {} } = config
+  const finalOptions = { parser: safeParse, ...options }
+
   if (!processor) {
-    processor = postcss(config.plugins || [])
+    processor = postcss(plugins)
   }
 
-  return processor.process(rawStyles, options)
+  return processor.process(rawStyles, finalOptions)
 } 
 
 /**
  * Parse specified Tagged Template Strings with CSS and expressions
  *
- * @param {String}
+ * @param {String} rawStyles
+ * @param {Object} processOptions
  * @returns {Object} JSS object
  */
-export default async (rawStyles) => {
-  const processed = await processParsing(rawStyles)
+export default async (rawStyles, processOptions) => {
+  const processed = await processParsing(rawStyles, processOptions)
   return postcssJs.objectify(processed.root)
 }
 

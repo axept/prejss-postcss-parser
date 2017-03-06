@@ -20,32 +20,27 @@ const postcssrcSync = deasync(cb => {
     .catch(err => cb(err))
 })
 
-let config = {}
+let loadedConfig = {}
 try {
-  config = postcssrcSync()
+  loadedConfig = postcssrcSync()
 } catch (err) {
   console.error(err)
 }
 
-const processor = postcss(config.plugins || [])
-const options = config.options || {}
-const finalOptions = { parser: safeParse, ...options }
-
-const processSync = deasync((raw, cb) => {
-  return processor.process(raw, finalOptions)
-    .then(res => cb(null, res))
-    .catch(err => cb(err))
-})
-
 /**
  * Parse specified Tagged Template Strings with CSS and expressions
  *
- * @param {String} 
+ * @param {String} raw source
+ * @param {Object} processOptions from api
  * @returns {Object} JSS object
  */
-export default (rawStyles) => {
-  const processed = processSync(rawStyles)
-  return postcssJs.objectify(processed.root)
+export default (raw, processOptions = {}) => {
+  const { config = loadedConfig } = processOptions
+  const { plugins = [], options = {} } = config
+  const processor =  postcss(plugins)
+  const finalOptions = { parser: safeParse, ...options }
+  const processed = processor.process(raw, finalOptions).root
+  return postcssJs.objectify(processed)
 }
 
 
