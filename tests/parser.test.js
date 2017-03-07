@@ -1,5 +1,4 @@
 import { syncParser, asyncParser } from '../src'
-import nested from 'postcss-nested'
 
 const css = `
   button {
@@ -19,7 +18,7 @@ const objectCss = {
 
 const options = {
   config: {
-    plugins: [nested]
+    plugins: ['postcss-nested']
   }
 }
 
