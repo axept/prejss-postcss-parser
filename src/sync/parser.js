@@ -14,17 +14,35 @@ import postcssJs from 'postcss-js'
 import postcssrc from 'postcss-load-config'
 import deasync from 'deasync'
 
-const postcssrcSync = deasync(cb => {
-  postcssrc()
-    .then(res => cb(null, res))
-    .catch(err => cb(err))
-})
+let config
+let processor
 
-let loadedConfig = {}
-try {
-  loadedConfig = postcssrcSync()
-} catch (err) {
-  console.error(err)
+/**
+ * 1. Initiate config, options and processor variables in module scope,
+ *    if they are not initiated yet
+ *
+ * 2. Process parsing with initiated options
+ *
+ * @param {String} rawStyles
+ * @param {Object} processOptions
+ * @returns {Object} JSS Object
+ */
+const processParsing = async (rawStyles, processOptions = {}) => {
+  const { config: customConfig } = processOptions
+  if (!config && customConfig) {
+    config = customConfig
+  } else if (!config) {
+    config = await postcssrc()
+  }
+
+  const { plugins = [], options = {} } = config
+  const finalOptions = { parser: safeParse, ...options }
+
+  if (!processor) {
+    processor = postcss(plugins)
+  }
+
+  return processor.process(rawStyles, finalOptions)
 }
 
 /**
@@ -34,14 +52,12 @@ try {
  * @param {Object} processOptions from api
  * @returns {Object} JSS object
  */
-export default (raw, processOptions = {}) => {
-  const { config = loadedConfig } = processOptions
-  const { plugins = [], options = {} } = config
-  const processor =  postcss(plugins)
-  const finalOptions = { parser: safeParse, ...options }
-  const processed = processor.process(raw, finalOptions).root
-  return postcssJs.objectify(processed)
-}
+export default deasync((rawStyles, processOptions = {}, cb) => {
+  processParsing(rawStyles, processOptions)
+    .then(result => postcssJs.objectify(result.root))
+    .then(result => cb(null, result))
+    .catch(error => cb(error))
+})
 
 
 
