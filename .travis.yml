@@ -1,6 +1,11 @@
 language: node_js
 node_js:
   - 7
+script:
+  - npm version
+  - npm run check
+  - npm run test
+  - npm run build
 branches:
   only:
     - master
