@@ -1,6 +1,6 @@
 import { syncParser, asyncParser } from '../src'
 
-const css = `
+const rawCSS = `
   button {
     color: #ffffff;
     width: 100px;
@@ -8,7 +8,7 @@ const css = `
   }
 `
 
-const objectCss = {
+const expectedJSS = {
   button: {
     color: '#ffffff',
     width: '100px',
@@ -23,13 +23,13 @@ const options = {
 }
 
 it('sync parse from plain css to object', () => {
-  const result = syncParser(css, options)
+  const result = syncParser(rawCSS, options)
 
-  expect(result).toEqual(objectCss)
+  expect(result).toEqual(expectedJSS)
 })
 
 it('async parse from plain css to object', async () => {
-  const result = await asyncParser(css, options)
+  const result = await asyncParser(rawCSS, options)
 
-  expect(result).toEqual(objectCss)
+  expect(result).toEqual(expectedJSS)
 })

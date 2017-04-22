@@ -1,6 +1,6 @@
 import { asyncParser } from '../../src'
 
-const css = `
+const rawCSS = `
   button {
     color: #ffffff;
     width: 100px;
@@ -12,7 +12,7 @@ const css = `
   }
 `
 
-const objectCss = {
+const expectedJSS = {
   button: {
     color: '#ffffff',
     width: '100px',
@@ -28,7 +28,7 @@ beforeAll(() => {
 })
 
 it('should handle default config', async () => {
-  const result = await asyncParser(css)
+  const result = await asyncParser(rawCSS)
 
-  expect(result).toEqual(objectCss)
+  expect(result).toEqual(expectedJSS)
 })
