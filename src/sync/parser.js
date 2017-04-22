@@ -8,42 +8,10 @@
  *
  * @todo Find a way to do not use deasync
  */
-import postcss from 'postcss'
-import safeParse from 'postcss-safe-parser'
 import postcssJs from 'postcss-js'
-import postcssrc from 'postcss-load-config'
 import deasync from 'deasync'
 
-let config
-let processor
-
-/**
- * 1. Initiate config, options and processor variables in module scope,
- *    if they are not initiated yet
- *
- * 2. Process parsing with initiated options
- *
- * @param {String} rawStyles
- * @param {Object} processOptions
- * @returns {Object} JSS Object
- */
-const processParsing = async (rawStyles, processOptions = {}) => {
-  const { config: customConfig } = processOptions
-  if (!config && customConfig) {
-    config = customConfig
-  } else if (!config) {
-    config = await postcssrc()
-  }
-
-  const { plugins = [], options = {} } = config
-  const finalOptions = { parser: safeParse, ...options }
-
-  if (!processor) {
-    processor = postcss(plugins)
-  }
-
-  return processor.process(rawStyles, finalOptions)
-}
+import processParsing from '../common/process-parsing'
 
 /**
  * Parse specified Tagged Template Strings with CSS and expressions
@@ -58,6 +26,3 @@ export default deasync((rawStyles, processOptions = {}, cb) => {
     .then(result => cb(null, result))
     .catch(error => cb(error))
 })
-
-
-
