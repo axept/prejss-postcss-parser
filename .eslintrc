@@ -4,7 +4,7 @@
   "env": {
     "browser": false,
     "node": true,
-    "mocha": true
+    "jest": true
   },
   "ecmaFeatures": {
     "jsx": false,
