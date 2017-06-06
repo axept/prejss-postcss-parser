@@ -45,12 +45,12 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "deasync": "^0.1.9",
-    "postcss": "^5.2.15",
-    "postcss-js": "^0.3.0",
+    "postcss": "^6.0.1",
+    "postcss-js": "^1.0.0",
     "postcss-load-config": "^1.2.0",
-    "postcss-safe-parser": "^2.0.0",
-    "postcss-scss": "^0.4.1",
-    "postcss-simple-vars": "^3.0.0"
+    "postcss-safe-parser": "^3.0.0",
+    "postcss-scss": "^1.0.0",
+    "postcss-simple-vars": "^4.0.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -71,7 +71,7 @@
     "flow-bin": "^0.39.0",
     "jest": "^19.0.2",
     "postcss-extend": "^1.0.5",
-    "postcss-nested": "^1.0.0",
+    "postcss-nested": "^2.0.2",
     "rimraf": "^2.6.0"
   }
 }
